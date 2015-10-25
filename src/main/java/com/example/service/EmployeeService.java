@@ -39,7 +39,6 @@ public class EmployeeService implements Serializable {
     
     @Transactional(Transactional.TxType.REQUIRED)
     public Employee insert(EmployeeDto employeeDto) {
-        System.out.println("============ IN SERVICE : " + employeeDto);
         return employeeDao.insert(convertToEntity(employeeDto));
     }
     
@@ -74,12 +73,11 @@ public class EmployeeService implements Serializable {
         entity.setEmpId(dto.getEmpId());
         entity.setName(dto.getName());
         entity.setJoinedDate(dto.getJoinedDate());
+        
         Department department = new Department();
         department.setDeptId(dto.getDepartment().getDeptId());
         department.setName(dto.getDepartment().getName());
         entity.setDepartment(department);
-        
-        System.out.println("============ IN CONVERT : " + entity);
         
         return entity;
     }

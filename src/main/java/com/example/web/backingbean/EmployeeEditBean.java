@@ -34,9 +34,11 @@ public class EmployeeEditBean implements Serializable {
     @Pattern(regexp = "[1-9][0-9]*")
     private String empId;
     @Size(min = 1, max = 40)
+    @Pattern(regexp = "[a-zA-Z\\s]*")
     private String name;
     @NotNull
     private Date joinedDate;
+    @NotNull
     @Pattern(regexp = "[1-9][0-9]*")
     private String deptId;
     private String deptName;
@@ -47,6 +49,7 @@ public class EmployeeEditBean implements Serializable {
         employeeDto.setEmpId(Integer.valueOf(empId));
         employeeDto.setName(name);
         employeeDto.setJoinedDate(joinedDate);
+        
         DepartmentDto departmentDto = new DepartmentDto();
         departmentDto.setDeptId(Integer.valueOf(deptId));
         employeeDto.setDepartment(departmentDto);

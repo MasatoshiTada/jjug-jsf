@@ -33,10 +33,11 @@ public class EmployeeInsertBean implements Serializable {
     private Conversation conversation;
     
     @Size(min = 1, max = 40)
-//    @Pattern(regexp = "[a-ZA-Z]*")
+    @Pattern(regexp = "[a-zA-Z\\s]*")
     private String name;
     @NotNull
     private Date joinedDate;
+    @NotNull
     @Pattern(regexp = "[1-9][0-9]*")
     private String deptId;
     private String deptName;
@@ -71,8 +72,6 @@ public class EmployeeInsertBean implements Serializable {
         department.setName(deptName);
         employee.setDepartment(department);
         
-        System.out.println("============ deptId : " + deptId);
-        System.out.println("============ IN BEAN " + employee);
         employeeService.insert(employee);
         
         conversation.end();

@@ -48,7 +48,7 @@ public class Employee implements Serializable {
     @Column(name = "joined_date")
     private Date joinedDate;
     
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @ManyToOne
     @JoinColumn(name = "dept_id", referencedColumnName = "dept_id")
     private Department department;
 
