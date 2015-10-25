@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>社員情報編集（確認）</title>
+    </h:head>
+    <h:body>
+        <h1>この社員情報の変更を確定しますか？</h1>
+        <h:form>
+            社員ID：
+            <h:outputText value="#{employeeEditBean.empId}"/><br/>
+            氏名：
+            <h:outputText value="#{employeeEditBean.name}"/><br/>
+            入社年月日：
+            <h:outputText value="#{employeeEditBean.joinedDate}">
+                <f:convertDateTime pattern="yyyy-MM-dd" timeStyle="Asia/Tokyo"/>
+            </h:outputText><br/>
+            部署：
+            <h:outputText value="#{employeeEditBean.deptName}"/><br/>
+            <h:commandButton action="#{employeeEditBean.cancel()}" value="戻る"/>
+            <h:commandButton action="#{employeeEditBean.update()}" value="確定"/>
+        </h:form>
+    </h:body>
+</html>
+

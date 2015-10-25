@@ -35,7 +35,9 @@ public class EmployeeDao implements Serializable {
     
     @Transactional(Transactional.TxType.REQUIRED)
     public Employee insert(Employee employee) {
-        em.persist(employee);
+        System.out.println("============= IN DAO : " + employee);
+//        em.persist(employee);
+        em.merge(employee);
         return employee;
     }
     

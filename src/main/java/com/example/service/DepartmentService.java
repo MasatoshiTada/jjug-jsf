@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 
 /**
  *
@@ -18,9 +19,16 @@ public class DepartmentService implements Serializable {
     
     @Inject
     private DepartmentDao departmentDao;
-    
+
+    @Transactional(Transactional.TxType.REQUIRED)
     public List<DepartmentDto> findAll() {
         return convertToDtoList(departmentDao.findAll());
+    }
+    
+    @Transactional(Transactional.TxType.REQUIRED)
+    public DepartmentDto findById(Integer deptId) {
+        Department entity = departmentDao.findById(deptId);
+        return entity == null ? null : convertToDto(entity);
     }
     
     private DepartmentDto convertToDto(Department entity) {

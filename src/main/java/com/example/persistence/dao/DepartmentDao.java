@@ -19,6 +19,11 @@ public class DepartmentDao implements Serializable {
     private EntityManager em;
     
     @Transactional(Transactional.TxType.REQUIRED)
+    public Department findById(Integer deptId) {
+        return em.find(Department.class, deptId);
+    }
+    
+    @Transactional(Transactional.TxType.REQUIRED)
     public List<Department> findAll() {
         return em.createNamedQuery("Department.findAll", Department.class)
                 .getResultList();

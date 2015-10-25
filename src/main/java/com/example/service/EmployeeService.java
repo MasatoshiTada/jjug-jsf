@@ -28,7 +28,8 @@ public class EmployeeService implements Serializable {
     
     @Transactional(Transactional.TxType.REQUIRED)
     public EmployeeDto findByEmpId(Integer empId) {
-        return convertToDto(employeeDao.findByEmpId(empId));
+        Employee entity = employeeDao.findByEmpId(empId);
+        return entity == null ? null : convertToDto(entity);
     }
     
     @Transactional(Transactional.TxType.REQUIRED)
@@ -38,6 +39,7 @@ public class EmployeeService implements Serializable {
     
     @Transactional(Transactional.TxType.REQUIRED)
     public Employee insert(EmployeeDto employeeDto) {
+        System.out.println("============ IN SERVICE : " + employeeDto);
         return employeeDao.insert(convertToEntity(employeeDto));
     }
     
@@ -76,6 +78,9 @@ public class EmployeeService implements Serializable {
         department.setDeptId(dto.getDepartment().getDeptId());
         department.setName(dto.getDepartment().getName());
         entity.setDepartment(department);
+        
+        System.out.println("============ IN CONVERT : " + entity);
+        
         return entity;
     }
     

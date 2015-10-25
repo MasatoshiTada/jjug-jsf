@@ -2,11 +2,13 @@ package com.example.web.backingbean;
 
 import com.example.service.EmployeeService;
 import com.example.web.dto.EmployeeDto;
+import com.example.web.util.FacesUtil;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.context.Flash;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -27,6 +29,8 @@ public class EmployeeIndexBean implements Serializable {
 
     @Pattern(regexp = "[a-zA-Z]*")
     private String name;
+    @Pattern(regexp = "[1-9][0-9]*")
+    private String empId;
     
     @PostConstruct
     public void init() {
@@ -41,6 +45,20 @@ public class EmployeeIndexBean implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
     }
+    
+//    public String goEdit() {
+//        Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
+//        EmployeeDto employeeDto = employeeService.findByEmpId(Integer.valueOf(empId));
+//        flash.put("employee", employeeDto);
+//        return "edit.xhtml" + FacesUtil.REDIRECT;
+//    }
+//    
+//    public String goDelete() {
+//        Flash flash = FacesUtil.getFlash();
+//        EmployeeDto employeeDto = employeeService.findByEmpId(Integer.valueOf(empId));
+//        flash.put("employee", employeeDto);
+//        return "delete.xhtml" + FacesUtil.REDIRECT;
+//    }
     
     /**
      * @return the employeeList
@@ -68,6 +86,20 @@ public class EmployeeIndexBean implements Serializable {
      */
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * @return the empId
+     */
+    public String getEmpId() {
+        return empId;
+    }
+
+    /**
+     * @param empId the empId to set
+     */
+    public void setEmpId(String empId) {
+        this.empId = empId;
     }
     
 }

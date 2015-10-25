@@ -8,6 +8,7 @@ import com.example.web.util.FacesUtil;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
@@ -22,8 +23,8 @@ import javax.validation.constraints.Size;
  */
 @Named
 @ConversationScoped
-public class EmployeeEditBean implements Serializable {
-
+public class EmployeeInsertBean implements Serializable {
+    
     @Inject
     private EmployeeService employeeService;
     @Inject
@@ -31,84 +32,54 @@ public class EmployeeEditBean implements Serializable {
     @Inject
     private Conversation conversation;
     
-    @Pattern(regexp = "[1-9][0-9]*")
-    private String empId;
     @Size(min = 1, max = 40)
+//    @Pattern(regexp = "[a-ZA-Z]*")
     private String name;
     @NotNull
     private Date joinedDate;
     @Pattern(regexp = "[1-9][0-9]*")
     private String deptId;
     private String deptName;
+    
     private List<DepartmentDto> departmentList;
     
-    public String update() {
-        EmployeeDto employeeDto = new EmployeeDto();
-        employeeDto.setEmpId(Integer.valueOf(empId));
-        employeeDto.setName(name);
-        employeeDto.setJoinedDate(joinedDate);
-        DepartmentDto departmentDto = new DepartmentDto();
-        departmentDto.setDeptId(Integer.valueOf(deptId));
-        employeeDto.setDepartment(departmentDto);
+    @PostConstruct
+    public void init() {
+        if (conversation.isTransient()) {
+            conversation.setTimeout(60000);
+            conversation.begin();
+            departmentList = departmentService.findAll();
+        }
+    }
+    
+    public String confirm() {
+        deptName = departmentService.findById(Integer.valueOf(deptId)).getName();
+        return "insert-confirm.xhtml";
+    }
+    
+    public String cancel() {
+        deptName = departmentService.findById(Integer.valueOf(deptId)).getName();
+        return "insert.xhtml";
+    }
+    
+    public String insert() {
+        EmployeeDto employee = new EmployeeDto();
+        employee.setName(name);
+        employee.setJoinedDate(joinedDate);
+        DepartmentDto department = new DepartmentDto();
+        department.setDeptId(Integer.valueOf(deptId));
+        department.setName(deptName);
+        employee.setDepartment(department);
         
-        employeeService.update(employeeDto);
+        System.out.println("============ deptId : " + deptId);
+        System.out.println("============ IN BEAN " + employee);
+        employeeService.insert(employee);
         
         conversation.end();
         
         return "index.xhtml" + FacesUtil.REDIRECT;
     }
     
-    public String confirm() {
-        deptName = departmentService.findById(Integer.valueOf(deptId)).getName();
-        return "edit-confirm.xhtml";
-    }
-
-    public String cancel() {
-        return "edit.xhtml";
-    }
-    
-    /**
-     * edit.xhtmlの初期化時にイベントで呼ばれるメソッドです。
-     * init()メソッドより後に呼ばれます。
-     */
-    public void preRenderView() {
-        if (conversation.isTransient()) {
-            // 会話のタイムアウトを1分間に設定
-            conversation.setTimeout(60000);
-            // 会話を開始する
-            conversation.begin();
-            
-            EmployeeDto employeeDto = employeeService.findByEmpId(Integer.valueOf(empId));
-            empId = employeeDto.getEmpId().toString();
-            name = employeeDto.getName();
-            joinedDate = employeeDto.getJoinedDate();
-            deptId = employeeDto.getDepartment().getDeptId().toString();
-            deptName = employeeDto.getDepartment().getName();
-            departmentList = departmentService.findAll();
-        }
-    }
-
-    /**
-     * @return the empId
-     */
-    public String getEmpId() {
-        return empId;
-    }
-
-    /**
-     * @param empId the empId to set
-     */
-    public void setEmpId(String empId) {
-        this.empId = empId;
-    }
-
-    /**
-     * @return the departmentList
-     */
-    public List<DepartmentDto> getDepartmentList() {
-        return departmentList;
-    }
-
     /**
      * @return the name
      */
@@ -157,6 +128,13 @@ public class EmployeeEditBean implements Serializable {
     public String getDeptName() {
         return deptName;
     }
+
+    /**
+     * @return the departmentList
+     */
+    public List<DepartmentDto> getDepartmentList() {
+        return departmentList;
+    }
     
-    // setDeptName()は、ビューから呼ばれることが無いので作っていません
+    
 }

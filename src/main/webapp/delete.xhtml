@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <title>社員情報削除</title>
+    </h:head>
+    <h:body>
+        <f:metadata>
+            <f:viewParam id="empId" name="empId" value="#{employeeDeleteBean.empId}"/>
+        </f:metadata>
+        <f:event type="preRenderView" listener="#{employeeDeleteBean.preRenderView()}" />
+        <h1>社員情報削除</h1>
+        <p>この社員情報を削除しますか？</p>
+        <h:form>
+            社員ID：
+            <h:outputText value="#{employeeDeleteBean.employee.empId}"/><br/>
+            氏名：
+            <h:outputText value="#{employeeDeleteBean.employee.name}"/><br/>
+            入社年月日：
+            <h:outputText p:type="date" value="#{employeeDeleteBean.employee.joinedDate}">
+                <f:convertDateTime pattern="yyyy-MM-dd" timeStyle="Asia/Tokyo"/>
+            </h:outputText><br/>
+            部署：
+            <h:outputText value="#{employeeDeleteBean.employee.department.name}"/><br/>
+            <h:commandButton action="#{employeeDeleteBean.cancel()}" value="戻る"/>
+            <h:commandButton action="#{employeeDeleteBean.delete()}" value="削除"/>
+        </h:form>
+    </h:body>
+</html>
+

@@ -17,6 +17,8 @@
             </h:commandButton>
         </h:form>
         
+        <h:link outcome="insert">社員を新規作成する</h:link>
+        
         <h:messages id="error" errorStyle="color:red"/>
         
         <h:dataTable id="employeeList" value="#{employeeIndexBean.employeeList}" var="emp" border="1">
@@ -45,10 +47,22 @@
             <h:column>
                 <f:facet name="header"><h:outputText value="編集"/></f:facet>
                 <h:link outcome="edit?empId=#{emp.empId}">編集</h:link>
+                <!--
+                <h:form>
+                    <h:inputHidden value="#{employeeIndexBean.empId}"/>
+                    <h:commandButton action="#{employeeIndexBean.goEdit()}" value="編集"/>
+                </h:form>
+                -->
             </h:column>
             <h:column>
                 <f:facet name="header"><h:outputText value="削除"/></f:facet>
                 <h:link outcome="delete?empId=#{emp.empId}">削除</h:link>
+                <!--
+                <h:form>
+                    <h:inputHidden value="#{employeeIndexBean.empId}"/>
+                    <h:commandButton action="#{employeeIndexBean.goDelete()}" value="削除"/>
+                </h:form>
+                -->
             </h:column>
         </h:dataTable>
     </h:body>

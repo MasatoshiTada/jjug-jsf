@@ -3,6 +3,7 @@ package com.example.persistence.entity;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.TableGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -26,7 +28,17 @@ import javax.persistence.TemporalType;
 public class Employee implements Serializable {
     @Id
     @Column(name = "emp_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.TABLE,
+            generator = "employeeIdGenerator")
+    @TableGenerator(
+            name = "employeeIdGenerator",
+            table = "NUMBERING_TABLE",
+            pkColumnName = "ID_TYPE",
+            pkColumnValue = "EMPLOYEE_ID",
+            valueColumnName = "LAST_ID",
+            initialValue = 10,
+            allocationSize = 1
+    )
     private Integer empId;
     
     @Column(length = 40, nullable = false)
@@ -36,7 +48,7 @@ public class Employee implements Serializable {
     @Column(name = "joined_date")
     private Date joinedDate;
     
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "dept_id", referencedColumnName = "dept_id")
     private Department department;
 
@@ -124,6 +136,11 @@ public class Employee implements Serializable {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" + "empId=" + empId + ", name=" + name + ", joinedDate=" + joinedDate + ", department=" + department + '}';
     }
     
 }
