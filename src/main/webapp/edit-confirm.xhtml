@@ -15,7 +15,7 @@
             <h:outputText value="#{employeeEditBean.name}"/><br/>
             入社年月日：
             <h:outputText value="#{employeeEditBean.joinedDate}">
-                <f:convertDateTime pattern="yyyy-MM-dd" timeStyle="Asia/Tokyo"/>
+                <f:convertDateTime pattern="yyyy-MM-dd" timeZone="Asia/Tokyo"/>
             </h:outputText><br/>
             部署：
             <h:outputText value="#{employeeEditBean.deptName}"/><br/>

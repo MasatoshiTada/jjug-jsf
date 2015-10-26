@@ -2,13 +2,11 @@ package com.example.web.backingbean;
 
 import com.example.service.EmployeeService;
 import com.example.web.dto.EmployeeDto;
-import com.example.web.util.FacesUtil;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.context.Flash;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -38,6 +36,7 @@ public class EmployeeIndexBean implements Serializable {
     }
     
     public void findByName() {
+        name = name == null ? "" : name;
         employeeList = employeeService.findByName(name);
         
         if (employeeList.isEmpty()) {
@@ -45,20 +44,6 @@ public class EmployeeIndexBean implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
     }
-    
-//    public String goEdit() {
-//        Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
-//        EmployeeDto employeeDto = employeeService.findByEmpId(Integer.valueOf(empId));
-//        flash.put("employee", employeeDto);
-//        return "edit.xhtml" + FacesUtil.REDIRECT;
-//    }
-//    
-//    public String goDelete() {
-//        Flash flash = FacesUtil.getFlash();
-//        EmployeeDto employeeDto = employeeService.findByEmpId(Integer.valueOf(empId));
-//        flash.put("employee", employeeDto);
-//        return "delete.xhtml" + FacesUtil.REDIRECT;
-//    }
     
     /**
      * @return the employeeList

@@ -21,7 +21,7 @@
             <h:inputText value="#{employeeEditBean.name}"/><br/>
             入社年月日：
             <h:inputText p:type="date" value="#{employeeEditBean.joinedDate}">
-                <f:convertDateTime pattern="yyyy-MM-dd" timeStyle="Asia/Tokyo"/>
+                <f:convertDateTime pattern="yyyy-MM-dd" timeZone="Asia/Tokyo"/>
             </h:inputText><br/>
             部署：
             <h:selectOneListbox value="#{employeeEditBean.deptId}">
