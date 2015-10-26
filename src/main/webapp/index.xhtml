@@ -10,7 +10,7 @@
         <h1>社員一覧</h1>
         <h:form>
             氏名キーワード：<h:inputText value="#{employeeIndexBean.name}"/>
-            <h:commandButton actionListener="#{employeeIndexBean.findByName}" value="検索">
+            <h:commandButton action="#{employeeIndexBean.findByName}" value="検索">
                 <!--
                 <f:ajax execute="@form" render=":employeeList :error"/>
                 -->
@@ -47,23 +47,15 @@
             <h:column>
                 <f:facet name="header"><h:outputText value="編集"/></f:facet>
                 <h:link outcome="edit?empId=#{emp.empId}">編集</h:link>
-                <!--
-                <h:form>
-                    <h:inputHidden value="#{employeeIndexBean.empId}"/>
-                    <h:commandButton action="#{employeeIndexBean.goEdit()}" value="編集"/>
-                </h:form>
-                -->
             </h:column>
             <h:column>
                 <f:facet name="header"><h:outputText value="削除"/></f:facet>
                 <h:link outcome="delete?empId=#{emp.empId}">削除</h:link>
-                <!--
-                <h:form>
-                    <h:inputHidden value="#{employeeIndexBean.empId}"/>
-                    <h:commandButton action="#{employeeIndexBean.goDelete()}" value="削除"/>
-                </h:form>
-                -->
             </h:column>
         </h:dataTable>
+        <h:form>
+            <h:commandButton action="#{employeeIndexBean.throwRuntimeException()}" value="実行時例外"/>
+            <h:commandButton action="#{employeeIndexBean.throwIOException()}" value="入出力例外"/>
+        </h:form>
     </h:body>
 </html>

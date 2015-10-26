@@ -2,6 +2,7 @@ package com.example.web.backingbean;
 
 import com.example.service.EmployeeService;
 import com.example.web.dto.EmployeeDto;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -32,7 +33,7 @@ public class EmployeeIndexBean implements Serializable {
     
     @PostConstruct
     public void init() {
-        employeeList = employeeService.findByName("");
+        employeeList = employeeService.findAll();
     }
     
     public void findByName() {
@@ -43,6 +44,14 @@ public class EmployeeIndexBean implements Serializable {
             FacesMessage message = new FacesMessage("該当する社員は存在しませんでした");
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
+    }
+    
+    public String throwRuntimeException() {
+        throw new RuntimeException();
+    }
+    
+    public String throwIOException() throws IOException {
+        throw new IOException();
     }
     
     /**

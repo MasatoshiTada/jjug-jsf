@@ -31,6 +31,7 @@ public class EmployeeDao implements Serializable {
         return em.createNamedQuery("Employee.findByNameJoinFetchDepartment", Employee.class)
                 .setParameter("name", "%" + nameKey + "%")
                 .getResultList();
+//        throw new RuntimeException();
     }
     
     @Transactional(Transactional.TxType.REQUIRED)
