@@ -8,6 +8,7 @@ import com.example.web.util.FacesUtil;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
@@ -72,9 +73,10 @@ public class EmployeeEditBean implements Serializable {
     
     /**
      * edit.xhtmlの初期化時にイベントで呼ばれるメソッドです。
-     * init()メソッドより後に呼ばれます。
+     * [at]PostConstructが付加されたメソッドより後に呼ばれます。
      */
     public void preRenderView() {
+        System.out.println("preRenderView");
         if (conversation.isTransient()) {
             // 会話のタイムアウトを1分間に設定
             conversation.setTimeout(60000);
@@ -91,6 +93,11 @@ public class EmployeeEditBean implements Serializable {
         }
     }
 
+    @PostConstruct
+    public void init() {
+        System.out.println("postConstruct");
+    }
+    
     /**
      * @return the empId
      */
