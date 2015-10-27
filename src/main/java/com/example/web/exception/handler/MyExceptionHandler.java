@@ -61,7 +61,7 @@ public class MyExceptionHandler extends ExceptionHandlerWrapper {
             try {
                 // エラー画面に画面遷移させる
                 String contextPath = externalContext.getRequestContextPath();
-                externalContext.redirect(contextPath + "/error.xhtml");
+                externalContext.redirect(contextPath + "/exception.xhtml");
             } catch (IOException e) {
                 System.out.println("error.xhtmlがありません");
             } finally {

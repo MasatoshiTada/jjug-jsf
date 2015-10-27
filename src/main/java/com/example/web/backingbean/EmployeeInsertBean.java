@@ -32,13 +32,14 @@ public class EmployeeInsertBean implements Serializable {
     @Inject
     private Conversation conversation;
     
-    @Size(min = 1, max = 40)
-    @Pattern(regexp = "[a-zA-Z\\s]*")
+    @NotNull(message = "{notnull}")
+    @Size(min = 1, max = 40, message = "{size.string}")
+    @Pattern(regexp = "[a-zA-Z\\s]*", message = "{pattern.alphabet.or.space}")
     private String name;
-    @NotNull
+    @NotNull(message = "{notnull}")
     private Date joinedDate;
-    @NotNull
-    @Pattern(regexp = "[1-9][0-9]*")
+    @NotNull(message = "{notnull}")
+    @Pattern(regexp = "[1-9][0-9]*", message = "{pattern.integer}")
     private String deptId;
     private String deptName;
     

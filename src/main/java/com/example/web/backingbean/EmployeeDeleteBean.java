@@ -20,7 +20,7 @@ public class EmployeeDeleteBean implements Serializable {
     @Inject
     private EmployeeService employeeService;
     
-    @Pattern(regexp = "[1-9][0-9]*")
+    @Pattern(regexp = "[1-9][0-9]*", message = "{pattern.integer}")
     private String empId;
     
     private EmployeeDto employee;

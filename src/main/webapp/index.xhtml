@@ -9,7 +9,7 @@
     <h:body>
         <h1>社員一覧</h1>
         <h:form>
-            氏名キーワード：<h:inputText value="#{employeeIndexBean.name}"/>
+            氏名キーワード：<h:inputText value="#{employeeIndexBean.name}" label="氏名キーワード"/>
             <h:commandButton action="#{employeeIndexBean.findByName}" value="検索">
                 <!--
                 <f:ajax execute="@form" render=":employeeList :error"/>

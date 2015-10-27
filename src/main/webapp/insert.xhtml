@@ -14,13 +14,13 @@
         
         <h:form>
             氏名：
-            <h:inputText value="#{employeeInsertBean.name}"/><br/>
+            <h:inputText value="#{employeeInsertBean.name}" label="氏名"/><br/>
             入社年月日：
-            <h:inputText p:type="date" value="#{employeeInsertBean.joinedDate}">
+            <h:inputText p:type="date" value="#{employeeInsertBean.joinedDate}" label="入社年月日">
                 <f:convertDateTime pattern="yyyy-MM-dd" timeZone="Asia/Tokyo"/>
             </h:inputText><br/>
             部署：
-            <h:selectOneListbox value="#{employeeInsertBean.deptId}">
+            <h:selectOneListbox value="#{employeeInsertBean.deptId}" label="部署">
                 <f:selectItems var="dept" value="#{employeeInsertBean.departmentList}"
                                itemValue="#{dept.deptId}" itemLabel="#{dept.name}"/>
             </h:selectOneListbox><br/>
