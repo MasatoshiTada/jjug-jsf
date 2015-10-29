@@ -12,6 +12,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -27,6 +28,7 @@ public class EmployeeIndexBean implements Serializable {
     private List<EmployeeDto> employeeList;
 
     @Pattern(regexp = "[a-zA-Z]*", message = "{pattern.alphabet.or.space}")
+    @Size(max = 10, message = "{size.string}")
     private String name;
     @Pattern(regexp = "[1-9][0-9]*", message = "{pattern.integer}")
     private String empId;
