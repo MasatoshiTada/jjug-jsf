@@ -60,7 +60,6 @@ public class EmployeeInsertBean implements Serializable {
     }
     
     public String cancel() {
-        deptName = departmentService.findById(Integer.valueOf(deptId)).getName();
         return "insert.xhtml";
     }
     
