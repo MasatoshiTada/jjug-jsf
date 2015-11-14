@@ -27,7 +27,7 @@ public class EmployeeIndexBean implements Serializable {
     
     private List<EmployeeDto> employeeList;
 
-    @Pattern(regexp = "[a-zA-Z]*", message = "{pattern.alphabet.or.space}")
+    @Pattern(regexp = "[a-zA-Z\\s]*", message = "{pattern.alphabet.or.space}")
     @Size(max = 10, message = "{size.string}")
     private String name;
     @Pattern(regexp = "[1-9][0-9]*", message = "{pattern.integer}")
