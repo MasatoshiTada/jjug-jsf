@@ -1,7 +1,7 @@
 package com.example.web.backingbean;
 
+import com.example.persistence.entity.Employee;
 import com.example.service.EmployeeService;
-import com.example.web.dto.EmployeeDto;
 import com.example.web.util.FacesUtil;
 import java.io.Serializable;
 import javax.faces.view.ViewScoped;
@@ -23,13 +23,13 @@ public class EmployeeDeleteBean implements Serializable {
     @Pattern(regexp = "[1-9][0-9]*", message = "{pattern.integer}")
     private String empId;
     
-    private EmployeeDto employee;
+    private Employee employee;
 
     /**
      * delete.xhtmlの初期化時に呼ばれるイベントメソッドです。
      */
     public void preRenderView() {
-        employee = employeeService.findByEmpId(Integer.valueOf(empId));
+        employee = employeeService.findByEmpId(Integer.valueOf(empId)).get();
     }
     
     public String cancel() {
@@ -58,7 +58,7 @@ public class EmployeeDeleteBean implements Serializable {
     /**
      * @return the employeeDto
      */
-    public EmployeeDto getEmployee() {
+    public Employee getEmployee() {
         return employee;
     }
     

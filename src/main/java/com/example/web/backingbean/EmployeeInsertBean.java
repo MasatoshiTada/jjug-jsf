@@ -1,9 +1,9 @@
 package com.example.web.backingbean;
 
+import com.example.persistence.entity.Employee;
+import com.example.persistence.entity.Department;
 import com.example.service.DepartmentService;
 import com.example.service.EmployeeService;
-import com.example.web.dto.DepartmentDto;
-import com.example.web.dto.EmployeeDto;
 import com.example.web.util.FacesUtil;
 import java.io.Serializable;
 import java.util.Date;
@@ -43,7 +43,7 @@ public class EmployeeInsertBean implements Serializable {
     private String deptId;
     private String deptName;
     
-    private List<DepartmentDto> departmentList;
+    private List<Department> departmentList;
     
     @PostConstruct
     public void init() {
@@ -64,10 +64,11 @@ public class EmployeeInsertBean implements Serializable {
     }
     
     public String insert() {
-        EmployeeDto employee = new EmployeeDto();
+        Employee employee = new Employee();
         employee.setName(name);
         employee.setJoinedDate(joinedDate);
-        DepartmentDto department = new DepartmentDto();
+        
+        Department department = new Department();
         department.setDeptId(Integer.valueOf(deptId));
         department.setName(deptName);
         employee.setDepartment(department);
@@ -131,7 +132,7 @@ public class EmployeeInsertBean implements Serializable {
     /**
      * @return the departmentList
      */
-    public List<DepartmentDto> getDepartmentList() {
+    public List<Department> getDepartmentList() {
         return departmentList;
     }
     

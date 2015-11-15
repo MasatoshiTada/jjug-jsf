@@ -1,7 +1,7 @@
 package com.example.web.backingbean;
 
+import com.example.persistence.entity.Employee;
 import com.example.service.EmployeeService;
-import com.example.web.dto.EmployeeDto;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
@@ -25,7 +25,7 @@ public class EmployeeIndexBean implements Serializable {
     @Inject
     private EmployeeService employeeService;
     
-    private List<EmployeeDto> employeeList;
+    private List<Employee> employeeList;
 
     @Pattern(regexp = "[a-zA-Z\\s]*", message = "{pattern.alphabet.or.space}")
     @Size(max = 10, message = "{size.string}")
@@ -59,15 +59,8 @@ public class EmployeeIndexBean implements Serializable {
     /**
      * @return the employeeList
      */
-    public List<EmployeeDto> getEmployeeList() {
+    public List<Employee> getEmployeeList() {
         return employeeList;
-    }
-
-    /**
-     * @param employeeList the employeeList to set
-     */
-    public void setEmployeeList(List<EmployeeDto> employeeList) {
-        this.employeeList = employeeList;
     }
 
     /**

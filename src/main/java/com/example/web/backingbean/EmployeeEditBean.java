@@ -1,9 +1,9 @@
 package com.example.web.backingbean;
 
+import com.example.persistence.entity.Employee;
+import com.example.persistence.entity.Department;
 import com.example.service.DepartmentService;
 import com.example.service.EmployeeService;
-import com.example.web.dto.DepartmentDto;
-import com.example.web.dto.EmployeeDto;
 import com.example.web.util.FacesUtil;
 import java.io.Serializable;
 import java.util.Date;
@@ -44,19 +44,19 @@ public class EmployeeEditBean implements Serializable {
     @Pattern(regexp = "[1-9][0-9]*", message = "{pattern.integer}")
     private String deptId;
     private String deptName;
-    private List<DepartmentDto> departmentList;
+    private List<Department> departmentList;
     
     public String update() {
-        EmployeeDto employeeDto = new EmployeeDto();
-        employeeDto.setEmpId(Integer.valueOf(empId));
-        employeeDto.setName(name);
-        employeeDto.setJoinedDate(joinedDate);
+        Employee employee = new Employee();
+        employee.setEmpId(Integer.valueOf(empId));
+        employee.setName(name);
+        employee.setJoinedDate(joinedDate);
         
-        DepartmentDto departmentDto = new DepartmentDto();
-        departmentDto.setDeptId(Integer.valueOf(deptId));
-        employeeDto.setDepartment(departmentDto);
+        Department department = new Department();
+        department.setDeptId(Integer.valueOf(deptId));
+        employee.setDepartment(department);
         
-        employeeService.update(employeeDto);
+        employeeService.update(employee);
         
         conversation.end();
         
@@ -83,13 +83,15 @@ public class EmployeeEditBean implements Serializable {
             conversation.setTimeout(60000);
             // 会話を開始する
             conversation.begin();
-            
-            EmployeeDto employeeDto = employeeService.findByEmpId(Integer.valueOf(empId));
-            empId = employeeDto.getEmpId().toString();
-            name = employeeDto.getName();
-            joinedDate = employeeDto.getJoinedDate();
-            deptId = employeeDto.getDepartment().getDeptId().toString();
-            deptName = employeeDto.getDepartment().getName();
+            Employee employee = employeeService.findByEmpId(Integer.valueOf(empId)).get();
+            empId = employee.getEmpId().toString();
+            name = employee.getName();
+            joinedDate = employee.getJoinedDate();
+
+            Department department = employee.getDepartment();
+            deptId = department.getDeptId().toString();
+            deptName = department.getName();
+
             departmentList = departmentService.findAll();
         }
     }
@@ -116,7 +118,7 @@ public class EmployeeEditBean implements Serializable {
     /**
      * @return the departmentList
      */
-    public List<DepartmentDto> getDepartmentList() {
+    public List<Department> getDepartmentList() {
         return departmentList;
     }
 
