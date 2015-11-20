@@ -30,6 +30,7 @@ public class EmployeeIndexBean implements Serializable {
     @Pattern(regexp = "[a-zA-Z\\s]*", message = "{pattern.alphabet.or.space}")
     @Size(max = 10, message = "{size.string}")
     private String name;
+    
     @Pattern(regexp = "[1-9][0-9]*", message = "{pattern.integer}")
     private String empId;
     
@@ -45,6 +46,12 @@ public class EmployeeIndexBean implements Serializable {
         if (employeeList.isEmpty()) {
             FacesMessage message = new FacesMessage("該当する社員は存在しませんでした");
             FacesContext.getCurrentInstance().addMessage(null, message);
+        }
+        
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            // ignore
         }
     }
     
