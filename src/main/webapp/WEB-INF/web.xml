@@ -35,6 +35,6 @@
     </error-page>
     <error-page>
         <error-code>404</error-code>
-        <location>/notFound.xhtml</location>
+        <location>/not-found.xhtml</location>
     </error-page>
 </web-app>
