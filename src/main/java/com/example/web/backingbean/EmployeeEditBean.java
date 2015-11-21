@@ -22,7 +22,8 @@ import javax.validation.constraints.Size;
  * @author tada
  */
 @Named
-@ConversationScoped
+// TODO: 演習4-2. 会話スコープを指定する
+
 public class EmployeeEditBean implements Serializable {
 
     @Inject
@@ -58,7 +59,8 @@ public class EmployeeEditBean implements Serializable {
         
         employeeService.update(employee);
         
-        conversation.end();
+        // TODO: 演習4-4. 会話を終了する
+        
         
         return "index.xhtml" + FacesUtil.REDIRECT;
     }
@@ -81,8 +83,9 @@ public class EmployeeEditBean implements Serializable {
         if (conversation.isTransient()) {
             // 会話のタイムアウトを1分間に設定
             conversation.setTimeout(60000);
-            // 会話を開始する
-            conversation.begin();
+            // TODO: 演習4-3. 会話を開始する
+            
+            
             Employee employee = employeeService.findByEmpId(Integer.valueOf(empId)).get();
             empId = employee.getEmpId().toString();
             name = employee.getName();

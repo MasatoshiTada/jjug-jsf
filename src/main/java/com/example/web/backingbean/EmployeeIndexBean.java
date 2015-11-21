@@ -15,7 +15,7 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 /**
- *
+ * 
  * @author tada
  */
 @Named
@@ -25,23 +25,30 @@ public class EmployeeIndexBean implements Serializable {
     @Inject
     private EmployeeService employeeService;
     
+    /**
+     * 社員リスト
+     */
     private List<Employee> employeeList;
 
-    @Pattern(regexp = "[a-zA-Z\\s]*", message = "{pattern.alphabet.or.space}")
-    @Size(max = 10, message = "{size.string}")
-    private String name;
+    // TODO: 演習2-1. 検証アノテーションを追加する
+    // 検証ルール1 正規表現で、"[a-zA-Z\\s]*"を指定。メッセージは"{pattern.alphabet.or.space}"
+    // 検証ルール2 文字列長の最大値を10に指定。メッセージは"{size.string}"
     
-    @Pattern(regexp = "[1-9][0-9]*", message = "{pattern.integer}")
-    private String empId;
+    private String name;
     
     @PostConstruct
     public void init() {
         employeeList = employeeService.findAll();
     }
     
+    /**
+     * 名前検索メソッド
+     */
     public void findByName() {
         name = name == null ? "" : name;
-        employeeList = employeeService.findByName(name);
+        
+        // TODO: 演習1-1. employeeServiceのfindByName()メソッドを呼び出してemployeeListに代入する。引数はname。
+        employeeList = null;
         
         if (employeeList.isEmpty()) {
             FacesMessage message = new FacesMessage("該当する社員は存在しませんでした");
@@ -84,18 +91,4 @@ public class EmployeeIndexBean implements Serializable {
         this.name = name;
     }
 
-    /**
-     * @return the empId
-     */
-    public String getEmpId() {
-        return empId;
-    }
-
-    /**
-     * @param empId the empId to set
-     */
-    public void setEmpId(String empId) {
-        this.empId = empId;
-    }
-    
 }

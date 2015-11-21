@@ -10,16 +10,22 @@
         <h1>社員一覧</h1>
         <h:form>
             氏名キーワード：<h:inputText value="#{employeeIndexBean.name}" label="氏名キーワード"/>
-            <h:commandButton action="#{employeeIndexBean.findByName}" value="検索">
-                <f:ajax execute="@form" render=":employeeList :error"/>
+            <!-- TODO: 演習1-2. action属性にBacking Beanの名前検索メソッドを指定する -->
+            <h:commandButton action="" value="検索">
+                <!-- TODO: 演習3. 検索をAjax化するタグを追加する -->
+                <!-- executeは"@form"、renderは":employeeList :error" -->
+                
             </h:commandButton>
         </h:form>
         
         <h:link outcome="insert">社員を新規作成する</h:link>
         
-        <h:messages id="error" errorStyle="color:red"/>
+        <!-- TODO: 演習2-2. バリデーション時のエラーメッセージを表示するタグを追加する -->
+        <!-- idは"error"、 errorStyleは"color:red"-->
         
-        <h:dataTable id="employeeList" value="#{employeeIndexBean.employeeList}" var="emp" border="1">
+        
+        <!-- TODO: 演習1-3. value属性にBacking Beanの社員リストを指定する -->
+        <h:dataTable id="employeeList" value="" var="emp" border="1">
             <h:column>
                 <f:facet name="header"><h:outputText value="社員ID"/></f:facet>
                 <h:outputText value="#{emp.empId}"/>
