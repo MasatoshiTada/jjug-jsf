@@ -31,9 +31,6 @@ public class EmployeeIndexBean implements Serializable {
     @Size(max = 10, message = "{size.string}")
     private String name;
     
-    @Pattern(regexp = "[1-9][0-9]*", message = "{pattern.integer}")
-    private String empId;
-    
     @PostConstruct
     public void init() {
         employeeList = employeeService.findAll();
@@ -84,18 +81,4 @@ public class EmployeeIndexBean implements Serializable {
         this.name = name;
     }
 
-    /**
-     * @return the empId
-     */
-    public String getEmpId() {
-        return empId;
-    }
-
-    /**
-     * @param empId the empId to set
-     */
-    public void setEmpId(String empId) {
-        this.empId = empId;
-    }
-    
 }
