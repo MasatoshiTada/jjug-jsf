@@ -18,8 +18,9 @@ import javax.validation.constraints.Size;
  * 
  * @author tada
  */
-@Named
-@ViewScoped
+// TODO: 演習1-1. 名前付けアノテーションとビュースコープアノテーションを追加
+
+
 public class EmployeeIndexBean implements Serializable {
     
     @Inject
@@ -47,7 +48,7 @@ public class EmployeeIndexBean implements Serializable {
     public void findByName() {
         name = name == null ? "" : name;
         
-        // TODO: 演習1-1. employeeServiceのfindByName()メソッドを呼び出してemployeeListに代入する。引数はname。
+        // TODO: 演習1-2. employeeServiceのfindByName()メソッドを呼び出してemployeeListに代入する。引数はname。
         employeeList = null;
         
         if (employeeList.isEmpty()) {
